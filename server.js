@@ -6,7 +6,7 @@
 //   By: rahisul <rahisul@icloud.com>                   / ___/ __ `/ __ \/ / ___/ / / / /    //
 //                                                     / /  / /_/ / / / / (__  ) /_/ / /     //
 //   Created: 2018/03/25 23:01:25 by rahisul          /_/   \__,_/_/ /_/_/____/___,_/_/      //
-//   Updated: 2018/03/25 23:42:52 by rahisul                                                 //
+//   Updated: 2018/03/25 23:54:24 by rahisul                                                 //
 //                                                                                           //
 // ***************************************************************************************** //
 
@@ -18,7 +18,7 @@ var fs = require("fs");
 
 //This all above are node modules we need. Now we gonna work about fileExtention
 
-var file_extension_type = {
+var file_extension_types = {
 	"html" : "text/html",
 	"jpeg" : "image/jpeg",
 	"jpg"  : "image/jpg",
@@ -48,10 +48,10 @@ http.createServer((req, res)=>{
 
 	if(status.isFile())
 	{
-		var file_extension_type = file_extension_type[path.extname(fileName).split(".").reverse()[0]];
+		var file_extension_type = file_extension_types[path.extname(filename).split(".").reverse()[0]];
 		res.writeHead(200, {"Content-type": file_extension_type});
 
-		var fileStream = fs.createReadStream(fileName);
+		var fileStream = fs.createReadStream(filename);
 		fileStream.pipe(res);
 	}
 	else if(status.isDirectory())	
